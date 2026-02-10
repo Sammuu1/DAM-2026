@@ -1,7 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {useState} from 'react';
 
-export default function App() {
+
+//para memoria es mejor dejar valores estaticos para evitar "hacer que adivine" que tipo de valor tiene
+//modificaciones 09/02: limitar likes por usuario y boton de guardar, empezando aqui
+const App = () => {
+  const [numberLikes, setNumberLikes] = useState(0);
+  const [color, setColor] = useState(false);
+  const [save, setSave] = useState(false);
+  const handleSave = () => {
+    setSave(!save);
+  }
+  const handleLikeandColor = () => {
+    setNumberLikes(color ? 0 : 1); 
+    setColor(!color);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -22,11 +36,16 @@ export default function App() {
         />
         <View style={styles.actionsRow}>
           <View style={styles.leftActions}>
-            <Text style={styles.icon}>❤️</Text>
+          <TouchableOpacity onPress={handleLikeandColor}>
+            <Text style={styles.icon}>{color ? '❤️' : '🤍'}</Text>
+          </TouchableOpacity>
+            <Text style={styles.icon}>{numberLikes}</Text>
             <Text style={styles.icon}>💬</Text>
-            <Text style={styles.icon}>📤</Text>
+            <Text style={styles.icon}>➦</Text>
           </View>
-          <Text style={styles.icon}>🔖</Text>
+        <TouchableOpacity onPress={handleSave}>
+          <Text style={styles.icon}>{save ? '⭐️' : '🔖'}</Text> {/*Modificaciones terminan aqui */}
+        </TouchableOpacity>
         </View>
         <Text style={styles.likes}>172 likes</Text>
         <Text style={styles.caption}>
@@ -50,6 +69,8 @@ export default function App() {
     </View>
   );
 }
+export default App;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
