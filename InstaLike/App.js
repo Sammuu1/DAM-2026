@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import {useState} from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
 
 //para memoria es mejor dejar valores estaticos para evitar "hacer que adivine" que tipo de valor tiene
